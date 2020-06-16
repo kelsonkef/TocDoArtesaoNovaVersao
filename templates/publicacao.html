@@ -33,8 +33,9 @@
         {% if comentarios %}
         {% for comentario in comentarios %}
         <img width="100" height="100" class="img-fluid" src="{{ comentario.usuario.foto_usuario.url }}" alt="">
+        <h6><b>{{ comentario.usuario}}</b></h6>
         <h6><b>Título:</b> {{ comentario.titulo}}</h6>
-        <h6><b>Descrição:</b>{{ comentario.descricao }}</h6>
+        <h6><b>Comentário:</b>{{ comentario.descricao }}</h6>
         {% if user.is_authenticated and user.id == comentario.usuario.id %}
         <div><a href="{% url 'deleta_comentario' comentario.id %}" type="button"
                 class="btn btn-danger">Deletar</a></div>
@@ -68,6 +69,7 @@
 {% else %}
 <p>Crie uma conta para comentar</p>
 {% endif %}
-
+<div class="login-clean">
+</div>
 {% include 'partials/_footer.html' %}
 {% endblock %}
