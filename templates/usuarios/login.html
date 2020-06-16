@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
 {% include 'partials/_busca.html' %}
-
 {% include 'partials/_menu.html' %}
-
-<!-- ##### Contact Form Area Start ##### -->
+{% include 'partials/_alertas.html' %}
 
 
 <div class="login-clean">
@@ -41,5 +38,7 @@ function exibirCriarConta()
 }
 
 </script>
+<div class="login-clean">
+</div>
 {% include 'partials/_footer.html' %}
 {% endblock %}

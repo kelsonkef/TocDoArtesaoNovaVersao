@@ -19,7 +19,7 @@
         <h6><b>Nome:</b> {{ publicacoes.usuario.nome }}</h6>
         <h6><b>Email:</b> {{ publicacoes.usuario.email }}</h6>
         <h6><b>Estado:</b> {{ publicacoes.usuario.estado }}</h6>
-        <h6><b>Contato:</b> {{ publicacoes.usuario.telefone }}</h6>
+        <h6><b>Telefone:</b> {{ publicacoes.usuario.telefone }}</h6>
         <h5><b>Site Associado:</b></h5>
         <h6><b>Site do Vendedor:</b> {{ publicacoes.usuario.site }}</h6>
     </div>
@@ -32,13 +32,13 @@
         <h4 align="center">Comentários </h4>
         {% if comentarios %}
         {% for comentario in comentarios %}
-        <img width="400" height="400" class="img-fluid" src="{{ comentario.usuario.foto_usuario.url }}" alt="">
-        <h1>{{ comentario.usuario.foto_usuario }}</h1>
+        <img width="100" height="100" class="img-fluid" src="{{ comentario.usuario.foto_usuario.url }}" alt="">
         <h6><b>Título:</b> {{ comentario.titulo}}</h6>
         <h6><b>Descrição:</b>{{ comentario.descricao }}</h6>
         {% if user.is_authenticated and user.id == comentario.usuario.id %}
-        <a href="{% url 'deleta_comentario' comentario.id %}" type="button"
-           class="btn btn-danger">Deletar</a>
+        <div><a href="{% url 'deleta_comentario' comentario.id %}" type="button"
+                class="btn btn-danger">Deletar</a></div>
+
         {% endif %}
         {% endfor %}
         {% endif %}

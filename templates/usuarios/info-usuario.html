@@ -1,59 +1,41 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- Preloader
-<div id="preloader">
-    <i class="circle-preloader"></i>
-    <img src="{% static 'img/core-img/pizza.png' %}" alt="">
-</div>
--->
-{% include 'partials/_busca.html' %}
-
 {% include 'partials/_menu.html' %}
 
-<!-- ##### Contact Form Area Start ##### -->
-<div class="contact-area section-padding-0-80">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-heading">
-                    <h2>Conte-nos Mais Sobre Você</h2>
+
+<div class="register-photo">
+    <div class="form-container">
+        <form action="{% url 'info_usuario' %}" method="POST">
+            {% csrf_token %}
+            <h2 class="text-center"><strong>Conte-nos mais sobre você!</strong></h2>
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <label><b>Possui conta no mercado livre? Nos informe o seu perfil*:</b></label>
+                    <input type="text" class="form-control" name="site"
+                           placeholder="Ex: https://www.mercadolivre.com.br/perfil/UNIVERSOCULTURAL" required>
+                </div>
+                <div class="col-12">
+                    <label for="file"><b>Telefone de Contato*:</b></label>
+                    <input type="tel" class="form-control" name="telefone" placeholder="Ex: 083987654321" required>
+                </div>
+                <div class="col-12">
+                    <label for="file"><b>Fale sobre Você*:</b></label>
+                    <textarea class="form-control" name="sobre" cols="30" rows="10"
+                              placeholder="Ex: Vendo produtos de crochê..." required></textarea>
+                </div>
+                <div class="col-12 col-lg-3">
+                    <label for="file"><b>Adicione sua Foto*:</b></label>
+                    <input type="file" class="form-control" name="foto_usuario" required>
+                </div>
+
+                <div class="col-12 text-center">
+                    <button class="btn-primary" type="submit">Atualizar</button>
                 </div>
             </div>
-        </div>
-          {% include 'partials/_alertas.html' %}
-        <div class="row">
-            <div class="col-12">
-                <div class="contact-form-area">
-                    <form action="{% url 'info_usuario' %}" method="POST">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-12 col-lg-12">
-                                <label for="nome_publicacao"><b>Tem conta no Mercado Livre coloque aqui:</b></label>
-                                <input type="text" class="form-control" name="site" placeholder="Ex.:https://www.mercadolivre.com.br/resumo?a=203940161" required>
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <label for="telefone"><b>Contato</b></label>
-                                <input type="tel" class="form-control" name="telefone" placeholder="Ex. :83 999999999" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="file"><b>Fale sobre Você</b></label>
-                                <textarea class="form-control" name="sobre" cols="30" rows="10" placeholder="Ex. Vendo produtos de madeira...." required></textarea>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <label for="file"><b>Adicione sua Foto</b></label>
-                                <input type="file" class="form-control" name="foto_usuario" required>
-                            </div>
-                            <div class="col-12 text-center">
-                                <button class="btn btn-success" type="submit">Atualiza as informações</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
-{% include 'partials/_footer.html' %}
+
 {% include 'partials/_footer.html' %}
 {% endblock %}
