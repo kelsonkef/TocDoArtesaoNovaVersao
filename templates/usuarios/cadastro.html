@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'partials/_menu.html' %}
+
+<div class="register-photo">
+        <div class="form-container">
+            <form method="post" action="{% url 'cadastro' %}">
+                {% csrf_token %}
+                <h2 class="text-center"><strong>Crie uma conta</strong></h2>
+                <label for="nome_usuario"><b>Nome completo:</b></label>
+                <div class="form-group"><input class="form-control" type="text" name="nome" placeholder="Ex: Lucas Carneiro" required></div>
+                 <label for="email"><b>Email:</b></label>
+                <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Ex: lucascarneiroandrade@gmail.com" required></div>
+                <label for="nascimento"><b>Data de Nascimento:</b></label>
+                <div class="form-group"><input class="form-control" type="date" name="nascimento" required></div>
+                <label for="estado"><b>Estado:</b></label>
+                <div class="form-group"><input class="form-control" type="text" name="estado" placeholder="Ex: Paraíba" required></div>
+                <label for="cidade"><b>Cidade:</b></label>
+                <div class="form-group"><input class="form-control" type="text" name="cidade" placeholder="Ex: João Pessoa" required></div>
+                <label for="telefone"><b>Telefone:</b></label>
+                <div class="form-group"><input class="form-control" type="tel" name="telefone" placeholder="Ex: (83) 99999-9999" required></div>
+                <label for="password"><b>Senha:</b></label>
+                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Senha"></div>
+                <label for="password2"><b>Confirmação de senha:</b></label>
+                <div class="form-group"><input class="form-control" type="password" name="password2" placeholder="Repetir Senha"></div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Cadastrar</button></div>
+                <a href="{% url 'login' %}" class="already">Já possui cadastro? Faça login aqui!</a></form>
+        </div>
+    </div>
+{% include 'partials/_footer.html' %}
+{% endblock %}

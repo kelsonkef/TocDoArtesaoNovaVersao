@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+
+<div class="register-photo">
+    <div class="form-container">
+        <form action="{% url 'atualiza_publicacao' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="text-center"><strong>Modifique sua publicação</strong></h2>
+            <input type="text" id="publicacao_id" class="form-control" name="publicacao_id"
+                   value="{{publicacao.id}}" hidden>
+
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <label for="nome_publicacao"><b>Título da Publicação:</b></label>
+                    <input type="text" id="nome_publicacao" class="form-control" name="nome_publicacao"
+                           placeholder="Ex. Suco de limão" value="{{publicacao.nome_publicacao}}" required>
+                </div>
+                <div class="col-12">
+                    <label for="file"><b>Descrição:</b></label>
+                    <textarea class="form-control" name="descricao" cols="30" rows="10"
+                              required>{{publicacao.descricao}}</textarea>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <label for="file"><b>Novo preço:</b><label>(Preço atual: R${{publicacao.preco}}) </label></label>
+                    <input type="number" class="form-control" name="preco" value="{{publicacao.preco}}" required>
+
+                </div>
+                <div class="col-12 col-lg-4">
+                    <label for="file"><b>Categoria:</b></label>
+                    <input type="text" class="form-control" name="categoria" placeholder="Ex. Sucos e bebidas"
+                           value="{{publicacao.categoria}}" required>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <label for="file"><b>Foto utilizada:</b></label>
+                    <img width="400" height="400" src="{{ publicacao.foto_publicacao.url }}" alt="">
+                </div>
+                <div class="col-12 col-lg-4">
+                    <label for="file"><b>Adicionar nova foto:</b></label>
+                    <input type="file" class="form-control" name="foto_publicacao">
+                </div>
+                <div class="form-check">
+                    {% if publicacao.publicada == True %}
+                    <input type="checkbox" class="form-check-input" name="publicada"
+                           value="{{publicacao.publicada}}" checked>
+                    {% else %}
+                    <input type="checkbox" class="form-check-input" name="publicada"
+                           value="{{publicacao.publicada}}">
+                    {% endif %}
+                    <label class="form-check-label" for="exampleCheck1"><b>Visibilidade Total</b></label>
+                </div>
+                <div class="col-12 text-center">
+                    <button class="btn-primary" type="submit">Atualizar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% include 'partials/_footer.html' %}
+{% endblock %}

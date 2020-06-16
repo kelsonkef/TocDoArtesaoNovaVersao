@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/_menu.html' %}
+
+<div class="register-photo" align="center">
+    <div class="form-container">
+        {% if publicacoes.foto_publicacao == '' %}
+        <img class="img-fluid" src="{% static 'img/bg-img/foto_publicacao.png' %}" alt="">
+        {% else %}
+        <img width="400" height="400" class="img-fluid" src="{{ publicacoes.foto_publicacao.url }}" alt="">
+
+        <h6><b>Preço:</b> R${{ publicacoes.preco }}</h6>
+        <h6><b>Categoria:</b> {{ publicacoes.categoria }}</h6>
+        <h6><b>Feito por:</b> {{ publicacoes.usuario }}</h6>
+        <h6><b>Data de Publicação:</b> {{ publicacoes.data_publicacao }}</h6>
+        <h6><b>Descrição:</b> {{ publicacoes.descricao }}</h6>
+        <h5><b>Contato:</b></h5>
+        <h6><b>Nome:</b> {{ publicacoes.usuario.nome }}</h6>
+        <h6><b>Email:</b> {{ publicacoes.usuario.email }}</h6>
+        <h6><b>Estado:</b> {{ publicacoes.usuario.estado }}</h6>
+        <h6><b>Contato:</b> {{ publicacoes.usuario.telefone }}</h6>
+        <h5><b>Site Associado:</b></h5>
+        <h6><b>Site do Vendedor:</b> {{ publicacoes.usuario.site }}</h6>
+    </div>
+    {% endif %}
+
+</div>
+
+<div class="register-photo">
+    <div class="form-container">
+        <h4 align="center">Comentários </h4>
+        {% if comentarios %}
+        {% for comentario in comentarios %}
+        <img width="400" height="400" class="img-fluid" src="{{ comentario.usuario.foto_usuario.url }}" alt="">
+        <h1>{{ comentario.usuario.foto_usuario }}</h1>
+        <h6><b>Título:</b> {{ comentario.titulo}}</h6>
+        <h6><b>Descrição:</b>{{ comentario.descricao }}</h6>
+        {% if user.is_authenticated and user.id == comentario.usuario.id %}
+        <a href="{% url 'deleta_comentario' comentario.id %}" type="button"
+           class="btn btn-danger">Deletar</a>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if user.is_authenticated %}
+    </div>
+</div>
+
+
+<div class="register-photo">
+    <div class="form-container">
+        <form action="{% url 'cadastra_comentario' publicacoes.id %}" method="post"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-12 col-lg-12">
+                <label for="nome_publicacao"><b>Título do comentário:</b></label>
+                <input type="text" id="titulo_comentario" class="form-control" name="titulo_comentario">
+            </div>
+
+            <div class="col-12">
+                <label for="file"><b>Seu comentário:</b></label>
+                <textarea class="form-control" name="comentario"></textarea>
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% else %}
+<p>Crie uma conta para comentar</p>
+{% endif %}
+
+{% include 'partials/_footer.html' %}
+{% endblock %}

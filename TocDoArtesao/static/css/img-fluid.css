@@ -1,0 +1,15 @@
+.card-body a div:first-child {
+   position: relative;
+   width: 100%;
+   height: 0;
+   padding-top: 10%; /*insert value for the desired ratio. ie: 60% -> 10/6 image*/
+}
+
+.img-fluid {
+   position: value 30px;
+   top:0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   object-fit: cover;
+}

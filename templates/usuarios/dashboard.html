@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'partials/_menu.html' %}
+
+<div class="photo-gallery">
+    <div class="container">
+        <h2 class="text-center"><strong>Minhas Publicações</strong></h2>
+    </div>
+    <div class="row photos">
+        {% if publicacoes %}
+        {% for publicacao in publicacoes %}
+        <!-- Single Best Receipe Area -->
+        <div class="form-container">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="single-best-receipe-area mb-30">
+                    {% if publicacao.foto_publicacao == '' %}
+                    <img class="img-fluid" src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                    {% else %}
+                    <div>
+                        <img width="400" height="400" src="{{ publicacao.foto_publicacao.url }}" alt="">
+                    </div>
+                    {% endif %}
+                    <div class="receipe-content">
+                        <a href="{% url 'publicacao' publicacao.id %}">
+                            <h5>{{ receita.nome_publicacao }}</h5>
+                            <a href="{% url 'edita_publicacao' publicacao.id %}" type="button"
+                               class="btn btn-info">Modificar</a>
+                            <a href="{% url 'deleta_publicacao' publicacao.id %}" type="button"
+                               class="btn btn-danger">Deletar</a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+        {% else %}
+        {% endif %}
+    </div>
+</div>
+
+</section>
+</div>
+</div>
+{% include 'partials/_footer.html' %}
+{% endblock %}
